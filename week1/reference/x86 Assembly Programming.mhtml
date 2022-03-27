@@ -1,0 +1,754 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: http://staff.ustc.edu.cn/~xlanchen/cailiao/x86%20Assembly%20Programming.htm
+Subject: x86 Assembly Programming
+Date: Fri, 18 Mar 2022 02:23:56 -0000
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--rP9bSbMGT6tsZeNTXvMcK2YCkQEnV08kJ2C5uup3eT----"
+
+
+------MultipartBoundary--rP9bSbMGT6tsZeNTXvMcK2YCkQEnV08kJ2C5uup3eT----
+Content-Type: text/html
+Content-ID: <frame-42ABDB995ACDFDCD4C2D94C8A046D64D@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://staff.ustc.edu.cn/~xlanchen/cailiao/x86%20Assembly%20Programming.htm
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><!-- saved fr=
+om url=3D(0038)http://cs.wwc.edu/~aabyan/215/x86.html --><html><head><meta =
+http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dwindows-1252"><=
+title>x86 Assembly Programming</title>
+
+<meta content=3D"MSHTML 5.00.2920.0" name=3D"GENERATOR"></head>
+<body bgcolor=3D"#ffffff">
+<hr>
+
+<center>
+<h1>x86 Assembly Programming</h1></center>
+<hr>
+
+<h2>Programming Model</h2>
+<h3>Memory</h3><font _mstmutation=3D"1">2<sup _mstmutation=3D"1">32</sup>- =
+bytes=20
+</font><h3>Registers</h3>
+<center>
+<table border=3D"1" nosave=3D"">
+  <caption><b>8 32-bit General Purpose Registers</b></caption>
+  <tbody>
+  <tr>
+    <td><b>Register</b></td>
+    <td><b>Function</b></td>
+    <td>16-bit low end</td>
+    <td>8-bit</td></tr>
+  <tr>
+    <td>eax</td>
+    <td>Accumulator</td>
+    <td>ax</td>
+    <td>ah, al</td></tr>
+  <tr>
+    <td>ebx</td>
+    <td>(base index)</td>
+    <td>bx</td>
+    <td>bh, bl</td></tr>
+  <tr>
+    <td>ecx</td>
+    <td>(count)</td>
+    <td>cx</td>
+    <td>ch, cl</td></tr>
+  <tr>
+    <td>edx</td>
+    <td>(data)</td>
+    <td>dx</td>
+    <td>dh, dl</td></tr>
+  <tr>
+    <td>edi</td>
+    <td>(destination index)</td>
+    <td>do</td>
+    <td></td></tr>
+  <tr>
+    <td>esi</td>
+    <td>(source index)</td>
+    <td>si</td>
+    <td></td></tr>
+  <tr>
+    <td>ebp</td>
+    <td>Frame pointer</td>
+    <td>bp</td>
+    <td></td></tr>
+  <tr>
+    <td>esp</td>
+    <td>Stack top pointer</td>
+    <td>sp</td>
+    <td></td></tr></tbody></table></center>&nbsp; <br>&nbsp; <br>&nbsp; <br=
+>&nbsp;=20
+<center>
+<table border=3D"1" nosave=3D"">
+  <caption><b>6 16-bit Section Registers</b></caption>
+  <tbody>
+  <tr>
+    <td><b>Register</b></td>
+    <td><b>Function</b></td></tr>
+  <tr>
+    <td>cs</td>
+    <td>Code section</td></tr>
+  <tr>
+    <td>ds</td>
+    <td>Data section</td></tr>
+  <tr>
+    <td>ss</td>
+    <td>Stack section</td></tr>
+  <tr>
+    <td>es</td>
+    <td>(extra section)</td></tr>
+  <tr>
+    <td>fs</td>
+    <td>(supplemental section)</td></tr>
+  <tr>
+    <td>gs</td>
+    <td>(supplemental section)</td></tr></tbody></table></center>&nbsp;=20
+<center>
+<table border=3D"1" nosave=3D"">
+  <caption><b>EFLAGS Register</b></caption>
+  <tbody>
+  <tr>
+    <td>S</td>
+    <td>Sign</td></tr>
+  <tr>
+    <td>Z</td>
+    <td>Zero</td></tr>
+  <tr>
+    <td>C</td>
+    <td>Carry</td></tr>
+  <tr>
+    <td>P</td>
+    <td>Parity</td></tr>
+  <tr>
+    <td>O</td>
+    <td>Overflow</td></tr></tbody></table></center><font _mstmutation=3D"1"=
+>32-bit EFLAGS Register=20
+</font><p>32-bit EIP (Instruction Pointer Register)=20
+</p><h2>AT&amp;T Style Syntax (GNU C/C++ compiler and GAS)</h2>
+<ul>
+  <li><font _mstmutation=3D"1">Instruction: <b _mstmutation=3D"1">opcode[b+=
+w+l] src, dest</b></font>=20
+  </li><li><font _mstmutation=3D"1">Register: <b _mstmutation=3D"1">%reg</b=
+></font>=20
+  </li><li>Memory operand size: <b>[b+w+l]</b> for byte, word, longword - 8=
+, 16, 32=20
+  bits=20
+  </li><li>Memory references: <tt>section</tt>:<tt>disp</tt>(<tt>base</tt>,=
+=20
+  <tt>index</tt>, <tt>scale</tt>) where <i>base</i> and <i>index</i> are=20
+  optional 32-bit base and index registers, <i>disp</i> is the optional=20
+  displacement, and <i>scale</i>, taking the values 1, 2, 4, and 8, multipl=
+ies=20
+  <i>index</i> to calculate the address of the operand.&nbsp; -- address is=
+=20
+  relative to section and is calculated by the expression: base + index*sca=
+le +=20
+  disp=20
+  </li><li><font _mstmutation=3D"1">Constants (immediate operands)=20
+  </font><ul>
+    <li>74 - decimal=20
+    </li><li>0112 - binary=20
+    </li><li>0x4A - hexadecimal=20
+    </li><li>0f-395.667e-36 - floating point=20
+    </li><li>'J - character=20
+    </li><li>"string" - string </li></ul></li></ul>
+<h3>Operand Addressing</h3>
+<ul>
+  <li>Code: CS + IP (Code segment + Offset)=20
+  </li><li>Stack: SS + SP (Stack segment + Offset (stack top))=20
+  </li><li><font _mstmutation=3D"1">Immediate Operand: $<i _mstmutation=3D"=
+1">constant_expression</i></font>=20
+  </li><li><font _mstmutation=3D"1">Register Operand: %<i _mstmutation=3D"1=
+">register_name</i></font>=20
+  </li><li><font _mstmutation=3D"1">Memory Operand: <tt _mstmutation=3D"1">=
+section</tt>:<tt _mstmutation=3D"1">displacement</tt>(<tt _mstmutation=3D"1=
+">base</tt>,=20
+  <tt _mstmutation=3D"1">index</tt>,&nbsp; <tt _mstmutation=3D"1">scale</tt=
+>)&nbsp; The section register is often=20
+  selected by default. cs for code, ss for stack instructions, ds for data=
+=20
+  references, es for strings. </font><br>&nbsp;=20
+  <center>
+  <table border=3D"1" nosave=3D"">
+    <tbody>
+    <tr>
+      <td>Base</td>
+      <td>+(</td>
+      <td>Index</td>
+      <td>*</td>
+      <td>Scale</td>
+      <td>)+</td>
+      <td>Displacement</td></tr>
+    <tr>
+      <td>eax&nbsp; <br>ebx&nbsp; <br>ecx&nbsp; <br>edx&nbsp; <br>esp&nbsp;=
+=20
+        <br>ebp&nbsp; <br>esi&nbsp; <br>edi</td>
+      <td></td>
+      <td>eax&nbsp; <br>ebx&nbsp; <br>ecx&nbsp; <br>edx&nbsp; <br>ebp&nbsp;=
+=20
+        <br>esi&nbsp; <br>edi</td>
+      <td></td>
+      <td>1&nbsp; <br>2&nbsp; <br>3&nbsp; <br>4</td>
+      <td></td>
+      <td>Name&nbsp; <br>Number</td></tr></tbody></table></center>&nbsp;=20
+  <ul>
+    <li><b>Direct </b>Operand: displacement (often just the symbolic name f=
+or a=20
+    memory location)=20
+    </li><li><b>Indirect</b> Operand: (base)=20
+    </li><li><font _mstmutation=3D"1"><b _mstmutation=3D"1">Base+displaceme=
+nt</b>: displacement(base)=20
+    </font><ul>
+      <li>index into an array=20
+      </li><li>access a field of a record </li></ul>
+    </li><li><font _mstmutation=3D"1"><b _mstmutation=3D"1">(index*scale)+d=
+isplacement</b>: displacement(,index,scale)=20
+    </font><ul>
+      <li>index into an array </li></ul>
+    </li><li><font _mstmutation=3D"1">B<b _mstmutation=3D"1">ase + index&nb=
+sp; + displacement</b>: displacement(base,index)=20
+    </font><ul>
+      <li>two dimensional array=20
+      </li><li>one dimensional array of records </li></ul>
+    </li><li><font _mstmutation=3D"1"><b _mstmutation=3D"1">Base+(index*sca=
+le)+ displacement</b>: displacement(base, index,scale)=20
+
+    </font><ul>
+      <li>two dimensional array </li></ul></li></ul></li></ul>
+<h2>Subroutines</h2>
+<ul>
+  <li>Function -- returns an explicit value=20
+  </li><li>Procedure -- does not return and explicit value </li></ul><font =
+_mstmutation=3D"1">The flow of=20
+control and the interface between a subroutine and its caller is described =
+by=20
+the following: </font><br>&nbsp;=20
+<center>
+<table border=3D"1" nosave=3D"">
+  <tbody>
+  <tr>
+    <td>Caller ...</td>
+    <td></td></tr>
+  <tr valign=3D"top" nosave=3D"">
+    <td nosave=3D""><b>call <i>target</i></b></td>
+    <td><font _mstmutation=3D"1">Transfer of control from caller to the sub=
+routine by&nbsp;=20
+      </font><ol>
+        <li>saving the contents of the program counter and=20
+        </li><li>the program counter (CS:IP) register to the entry point of=
+ the=20
+        subroutine. </li></ol></td></tr>
+  <tr>
+    <td>Subroutine</td>
+    <td></td></tr>
+  <tr>
+    <td><b>pushl %ebp</b>&nbsp; <br><b>movl %esp, %ebp</b></td>
+    <td>Save base pointer of the caller&nbsp; <br>New base pointer<b>=20
+      </b>(activation record/frame)&nbsp;</td></tr>
+  <tr>
+    <td>Callee ...</td>
+    <td>Body of Subroutine</td></tr>
+  <tr>
+    <td><font _mstmutation=3D"1"><b _mstmutation=3D"1">movl %ebp,%esp</b>&n=
+bsp; <br _mstmutation=3D"1"><b _mstmutation=3D"1">popl %ebp</b></font>&nbsp=
+;</td>
+    <td>Restore the callers stack top pointer&nbsp; <br>Restore the callers=
+=20
+      base pointer</td></tr>
+  <tr valign=3D"top" nosave=3D"">
+    <td><b>ret</b></td>
+    <td nosave=3D"">Return of control from the subroutine to the caller by =
+alter=20
+      the program counter (CS:IP) register to the saved address of the=20
+  caller.</td></tr>
+  <tr>
+    <td>Caller ...</td>
+    <td></td></tr></tbody></table></center><font _mstmutation=3D"1">An alte=
+rnative is to have the caller save=20
+and restore the values in the registers. (Prior to the call, the caller sav=
+es=20
+the registers it needs and after the return, restores the values of the=20
+registers)=20
+</font><h2>Data</h2>
+<h3>Data Representation</h3>
+<ul>
+  <li>Bits, Bytes, Wyde, word, double word -- modulo 2^n=20
+  </li><li>Sign magnitude -- sign bit 0=3D+, 1=3D-; magnitude=20
+  </li><li>One's complement -- negative numbers are complement of positive =
+numbers -=20
+  problem: two representations for zero=20
+  </li><li><font _mstmutation=3D"1">Twos complement (used by Intel) -- to n=
+egate:=20
+  </font><ul>
+    <li>Invert (complement)=20
+    </li><li>add 1 </li></ul>
+  </li><li>Excess 2^(n-1) (often used for exponent)=20
+  </li><li>ASCII - character data=20
+  </li><li>EBCDIC=20
+  </li><li>BCD </li></ul>
+<h3>Data Definition Directives</h3><font _mstmutation=3D"1">Description pro=
+vided to the assembler of how=20
+static data is to be organized.=20
+</font><ul>
+  <li>Symbolic name (variables and constants)=20
+  </li><li>Size (number of bytes)=20
+  </li><li>Initial value=20
+  </li><li><b>.data</b> </li></ul>
+<ul>
+  <li>Define Byte (DB): (8-bit values) [<i>name</i>] DB <i>initial value</i=
+> [,=20
+  <i>initial value</i>] see key examples in text; multiple values, undefine=
+d,=20
+  expression, C and Pascal strings, one or more lines of text, $ for length=
+ of=20
+  string=20
+  </li><li>Define Word (DW): (16-bit words) [<i>name</i>] DW <i>initial val=
+ue</i> [,=20
+  <i>initial value</i>] see key examples in text; reversed storage format,=
+=20
+  pointers=20
+  </li><li><font _mstmutation=3D"1">Define Double Word (DD): (32-bit double=
+ words) [<i _mstmutation=3D"1">name</i>] DW <i _mstmutation=3D"1">initial=
+=20
+  value</i> [, <i _mstmutation=3D"1">initial value</i></font>]=20
+  </li><li>Example: p. 80=20
+  </li><li>DUP Operator: <i>n</i> dup( <i>value</i> ) see key examples in t=
+ext; type=20
+  checking </li></ul>
+<h3>Constant Definitions</h3>
+<ul>
+  <li>.CONST=20
+  </li><li><font _mstmutation=3D"1">EQU: <i _mstmutation=3D"1">name</i> EQU=
+ <i _mstmutation=3D"1">constant expression</i></font> </li></ul>
+<h2>Data Transfer Instructions</h2>
+<ul>
+  <li><font _mstmutation=3D"1"><b _mstmutation=3D"1">mov</b> <b _mstmutatio=
+n=3D"1"><i>src, dest</i></b></font>=20
+  <ul>
+    <li>src: immediate value, register, memory=20
+    </li><li>dest: register, memory=20
+    </li><li>except memory, memory </li></ul>
+  </li><li><b>xchg <i>sd1, sd2</i></b>=20
+  <ul>
+    <li>Memory, Register=20
+    </li><li>Register, Memory=20
+    </li><li>Register, Register </li></ul>
+  </li><li><b>push <i>src</i></b>=20
+  <ul>
+    <li>src: immediate, register, or memory </li></ul>
+  </li><li><b>pop <i>dest</i></b>=20
+  <ul>
+    <li>dest: register or memory </li></ul>
+  </li><li><b>pusha</b> - save all registers on the stack=20
+  </li><li><b>popa </b>- restore all registers from the stack </li></ul>
+<h2>Arithmetic Instructions</h2>
+<ul>
+  <li><font _mstmutation=3D"1"><b _mstmutation=3D"1">add<i> src, dest</i></=
+b>; <b _mstmutation=3D"1">subl<i> src, dest</i></b> - src +- dest,=20
+  result in dest=20
+  </font><ul>
+    <li>Memory, Register=20
+    </li><li>Register, Memory=20
+    </li><li>Register, Register </li></ul>
+  </li><li>Flags Affected by add and sub: OF (overflow), SF (sign), ZF (zer=
+o), PF=20
+  (parity), CF (carry), AF (borrow)=20
+  </li><li><font _mstmutation=3D"1">i<b _mstmutation=3D"1">nc<i> dest</i></=
+b>;<b _mstmutation=3D"1"><i>&nbsp; </i>decl <i>dest</i></b> faster than=20
+  add/subtract=20
+  </font><ul>
+    <li>Memory=20
+    </li><li>Register </li></ul>
+  </li><li>Flags Affected by inc and dec: OF (overflow), SF (sign), ZF (zer=
+o), PF=20
+  (parity), AF (borrow)=20
+  </li><li><b>adc</b> &amp; <b>sbb </b>add with carry/subtract with borrow =
+- used for=20
+  adding numbers with more than 32-bits=20
+  </li><li><font _mstmutation=3D"1"><b _mstmutation=3D"1">cmp <i>src, dest<=
+/i></b> c<i _mstmutation=3D"1">omputes src - dest</i> (neither src or=20
+  dest changes) but may change flags.=20
+  </font><ul>
+    <li>Memory, Register=20
+    </li><li>Register, Memory=20
+    </li><li>Register, Register </li></ul>
+  </li><li><b>cmpxchg <i>src, dest</i></b> - compares&nbsp; dest with accum=
+ulator and=20
+  if equal, src is copied into destination.&nbsp; If not equal, destination=
+ is=20
+  copied to the accumlator.=20
+  </li><li><font _mstmutation=3D"1"><b _mstmutation=3D"1">neg <i>dest </i><=
+/b>- change sign or two's complement=20
+  </font><ul>
+    <li>Memory=20
+    </li><li>Register </li></ul>
+  </li><li>Flags Affected by NEG: SF (sign), ZF (zero), PF (parity), CF (ca=
+rry), AF=20
+  (borrow)=20
+  </li><li><b>mul <i>src</i> - </b>unsigned multiplication&nbsp; EDX:EAX =
+=3D src * eax=20
+  </li><li><b>imul <i>src </i></b>- signed multiplication EDX:EAX =3D src *=
+ eax=20
+  </li><li><font _mstmutation=3D"1">Flags Affected by MUL, IMUL:=20
+  </font><ul>
+    <li>undefined: SF, ZF, AF, PF=20
+    </li><li>OF, CF set if upper half is nonzero, set otherwise </li></ul>
+  </li><li><b>div src</b> (unsigned) src is general register or memory&nbsp=
+; quotient=20
+  eax =3D edx:eax/src; remainder edx =3D edx:eax mod src=20
+  </li><li><font _mstmutation=3D"1"><b _mstmutation=3D"1">idiv src</b> (sig=
+ned) src is general register or memory&nbsp; quotient=20
+  eax =3D edx:eax/src; remainder edx =3D edx:eax mod src=20
+  </font><ul>
+    <li><font _mstmutation=3D"1">Flags Affected by DIV, IDIV:=20
+    </font><ul>
+      <li>undefined: OF, SF, ZF, AF, PF=20
+      </li><li>Type 0 interrupt if quotient is too large for destination re=
+gister.=20
+      </li></ul></li></ul>
+  </li><li>CBW (change byte to word) expands AL to AX - signed arithmetic=
+=20
+  </li><li>CWD (change word to double word) expands AX to DX:AX - signed ar=
+ithmetic=20
+  </li><li>BCD Arithmetic - often used in point of sale terminals=20
+  </li><li>ASCII Arithmetic - rarely used </li></ul>
+<h2>Logic Instructions</h2>
+<ul>
+  <li><b>andl <i>src, dest</i></b> - dest =3D src and dest=20
+  </li><li><b>orl <i>src, dest</i></b>=20
+  </li><li><b>xorl <i>src, dest</i></b>=20
+  </li><li><b>notl <i>dest</i></b> - logical inversion or one's complement=
+=20
+  </li><li><font _mstmutation=3D"1"><b _mstmutation=3D"1">neg <i>dest </i><=
+/b>- change sign or two's complement=20
+  </font><ul>
+    <li>Memory=20
+    </li><li>Register </li></ul>
+  </li><li><b>testl src, dest </b>(an AND that does not change dest, only f=
+lags)=20
+</li></ul>
+<h2>Shift and Rotate Instructions</h2>
+<ul>
+  <li><font _mstmutation=3D"1">Logical Shift=20
+  </font><ul>
+    <li><b>shr <i>count, dest</i></b> - shift dest count bits to the right=
+=20
+    </li><li><b>shl <i>count, dest&nbsp; </i></b>- shift dest count bits to=
+ the left=20
+    </li></ul>
+  </li><li><font _mstmutation=3D"1">Arithmetic Shift(preserves sign)=20
+  </font><ul type=3D"DISC">
+    <li><b>sar <i>count, dest</i></b> - shift dest count bits to the right=
+=20
+    </li><li><b>sal <i>count, dest&nbsp; </i></b>- shift dest count bits to=
+ the left=20
+    </li></ul>
+  </li><li><font _mstmutation=3D"1">Rotate without/With carry flag=20
+  </font><ul type=3D"DISC">
+    <li><b>ror <i>count, dest</i></b> - rotate dest count bits to the right=
+=20
+    </li><li><b>rol <i>count, dest&nbsp; </i></b>- rotate dest count bits t=
+o the left=20
+
+    </li><li><b>rcr <i>count, dest</i></b> - rotate dest count bits to the =
+right=20
+    </li><li><b>rcl <i>count, dest&nbsp; </i></b>- rotate dest count bits t=
+o the left=20
+    </li></ul>
+  </li><li><b>test <i>arg, arg</i> </b>(an AND that does not change dest, o=
+nly flags)=20
+
+  </li><li><font _mstmutation=3D"1"><b _mstmutation=3D"1">cmp <i>src, dest<=
+/i></b> subtract src from dest (neither src or dest=20
+  changes) but may change flags.=20
+  </font><ul type=3D"DISC">
+    <li>Memory, Register=20
+    </li><li>Register, Memory=20
+    </li><li>Register, Register=20
+    </li><li>CMP </li></ul>
+  </li><li><font _mstmutation=3D"1">Flag Bit Operations=20
+  </font><ul type=3D"DISC">
+    <li>Complement CF: CMC=20
+    </li><li>Clear CF, DF, and IF: CLC,CLD,CLI, </li></ul>
+  </li><li>Set CF, DF, and IF: STC, STD, STI </li></ul>
+<h2>Control Transfer Instructions</h2>
+<ul>
+  <li><b>cmp <i>src, dest</i></b> -&nbsp; compute dest - src and set flags=
+=20
+  accordingly=20
+  </li><li>Jump instructions: the transfer is one-way; that is, a return ad=
+dress is=20
+  not saved. </li></ul>
+<ul><pre>&nbsp;&nbsp; NEXT:...
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>jmp NEXT</b>&nbsp; ;GOTO NEXT=
+</pre>
+  <center>
+  <table border=3D"1" nosave=3D"">
+    <caption><b>Jump Instructions</b></caption>
+    <tbody>
+    <tr>
+      <td><b>jmp <i>dest</i></b></td>
+      <td></td>
+      <td>unconditional</td>
+      <td>NEXT:...&nbsp; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+        ...&nbsp; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>jmp=20
+        NEXT</b>&nbsp; ;GOTO NEXT</td></tr>
+    <tr nosave=3D"">
+      <td colspan=3D"4" nosave=3D""><b><i>Unsigned conditional jumps</i></b=
+></td></tr>
+    <tr>
+      <td><b>j<i>cc dest</i></b></td>
+      <td></td>
+      <td></td>
+      <td></td></tr>
+    <tr>
+      <td>ja/jnbe</td>
+      <td>C=3D0 and Z=3D0</td>
+      <td>Jump if above</td>
+      <td></td></tr>
+    <tr>
+      <td>jae/jnb</td>
+      <td>C=3D0</td>
+      <td>Jump if above or equal to</td>
+      <td></td></tr>
+    <tr>
+      <td>jb/jnae</td>
+      <td>C=3D1</td>
+      <td>Jump if below</td>
+      <td></td></tr>
+    <tr>
+      <td>jbe/jna</td>
+      <td>C=3D1 or Z=3D1</td>
+      <td>Jump if below or equal to</td>
+      <td></td></tr>
+    <tr>
+      <td>jc</td>
+      <td>C=3D1</td>
+      <td>Jump if carry set</td>
+      <td></td></tr>
+    <tr>
+      <td>je/jz</td>
+      <td>Z=3D1</td>
+      <td>Jump if equal to</td>
+      <td></td></tr>
+    <tr>
+      <td>jnc</td>
+      <td>C=3D0</td>
+      <td>jump if carry cleared</td>
+      <td></td></tr>
+    <tr>
+      <td>jne/jnz</td>
+      <td>Z=3D0</td>
+      <td>jump if not equal</td>
+      <td></td></tr>
+    <tr>
+      <td>jnp/jpo</td>
+      <td>P=3D0</td>
+      <td>jump if no parity</td>
+      <td></td></tr>
+    <tr>
+      <td>jp/jpe</td>
+      <td>P=3D1</td>
+      <td>jump on parity</td>
+      <td></td></tr>
+    <tr>
+      <td>jcxz</td>
+      <td>cx=3D0</td>
+      <td>jump if cx=3D0</td>
+      <td>gcc does not use</td></tr>
+    <tr>
+      <td>jecxz</td>
+      <td>ecx=3D0</td>
+      <td>jump if ecx=3D0</td>
+      <td>gcc does not use</td></tr>
+    <tr nosave=3D"">
+      <td colspan=3D"4" nosave=3D""><b><i>Signed conditional jumps</i></b><=
+/td></tr>
+    <tr>
+      <td><b>j<i>cc dest</i></b></td>
+      <td></td>
+      <td></td>
+      <td></td></tr>
+    <tr>
+      <td>jg/jnle</td>
+      <td>Z=3D0 and S=3D0</td>
+      <td>jump if greater than</td>
+      <td></td></tr>
+    <tr>
+      <td>jge/jnl</td>
+      <td>S=3D0</td>
+      <td>jump if greater than or equal</td>
+      <td></td></tr>
+    <tr>
+      <td>jl/jnge</td>
+      <td>S=3D1</td>
+      <td>jump if less than</td>
+      <td></td></tr>
+    <tr>
+      <td>jle/jng</td>
+      <td>Z=3D1 or S=3D1</td>
+      <td>jump if less than or equal</td>
+      <td></td></tr>
+    <tr>
+      <td>jno</td>
+      <td>O=3D0</td>
+      <td>jump if no overflow</td>
+      <td></td></tr>
+    <tr>
+      <td>jns</td>
+      <td>S=3D0</td>
+      <td>jump on no sign</td>
+      <td></td></tr>
+    <tr>
+      <td>jo</td>
+      <td>O=3D1</td>
+      <td>jump on overflow</td>
+      <td></td></tr>
+    <tr>
+      <td>js</td>
+      <td>S=3D1</td>
+      <td>jump on sign</td>
+      <td></td></tr></tbody></table></center>&nbsp;=20
+  <li><font _mstmutation=3D"1">Loop instructions: The loop instruction decr=
+ements the ecx register then=20
+  jumps to the label if the termination condition is not=20
+  satisfied.<br _mstmutation=3D"1">&nbsp;<br _mstmutation=3D"1">&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp; movl count,=20
+  %ecx<br _mstmutation=3D"1">LABLE:<br _mstmutation=3D"1">&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;=20
+  ...<br _mstmutation=3D"1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+  loop LABEL </font><br>&nbsp;=20
+  <center>
+  <table border=3D"1" nosave=3D"">
+    <tbody>
+    <tr>
+      <td><b></b></td>
+      <td><b>Termination condition</b></td>
+      <td></td></tr>
+    <tr>
+      <td><b>loop<i> label</i></b></td>
+      <td>ecx =3D 0</td>
+      <td>gcc does not use</td></tr>
+    <tr>
+      <td><b>loopz/loope<i> lab el</i></b></td>
+      <td>ecx&nbsp; =3D0 or ZF =3D 0</td>
+      <td>gcc does not use</td></tr>
+    <tr>
+      <td><b>loopnz/loopne<i> label</i></b></td>
+      <td>ecx =3D 0 or ZF =3D 1</td>
+      <td>gcc does not use</td></tr></tbody></table></center><b></b>&nbsp;=
+=20
+  </li><li><font _mstmutation=3D"1"><b _mstmutation=3D"1">call<i> name</i><=
+/b> - call subroutine <b _mstmutation=3D"1"><i>name</i></b></font>=20
+  </li><li><b>ret</b> - return from subroutine=20
+  </li><li><b>enter</b>=20
+  </li><li><b>leave</b>=20
+  </li><li><b>int<i> n</i></b> - interrupt=20
+  </li><li><b>into</b> - interrupt on overflow=20
+  </li><li><b>iret</b> - interrupt return=20
+  </li><li><b>bound</b> - value out of range=20
+  </li><li>IF C THEN S;=20
+  </li><li>IF C THEN S1 ELSE S2;=20
+  </li><li>CASE E DO c1 : S1; c2 : S2; ... cn : Sn end;=20
+  </li><li>WHILE C DO S;=20
+  </li><li>REPEAT S UNTIL C;=20
+  </li><li>FOR I from J to K by L DO S; </li></ul>
+<h2>String Instructions</h2><font _mstmutation=3D"1">The sring instructions=
+ assume that by default, the=20
+address of the source string is in ds:esi (section register may be any of c=
+s,=20
+ss, es, fs, or gs) and the address of the destination string is in es:edi (=
+no=20
+override on the destination section).&nbsp; Typical code follow the scheme=
+=20
+</font><blockquote>initialize esi and edi with addresses for source and des=
+tination=20
+  strings <br>initialize ecx with count <br>Set the direction flag with=20
+  <b>cld</b> to count up, with <b>std</b> to cound down <br>prefix=20
+  string-operation</blockquote>
+<ul>
+  <li>[prefix]<b>movs</b> - move string=20
+  </li><li>[prefix]<b>cmps</b> - compare string WARNING: subtraction is des=
+t -=20
+  source, the reverse of the cmp instruction=20
+  </li><li>[prefix]<b>scas</b> - scan string=20
+  </li><li>[prefix]<b>lods</b> - load string=20
+  </li><li>[prefix]<b>stos</b> - store string=20
+  </li><li><font _mstmutation=3D"1">String instruction prefixes: The ecx re=
+gister must be initialized and the=20
+  DF flag in initialized to control the increment or decrement of the ecx=
+=20
+  register.&nbsp; Unlike the loop instruction, the test is performed before=
+ the=20
+  instruction is executed.=20
+  </font><ul>
+    <li><b>rep</b> - repeat while ecx not zero=20
+    </li><li><b>repe</b> - repeat while equal or zero (used only with cmps =
+and scas)=20
+    </li><li><b>repne</b> - repeat while not equal or not zero (used only w=
+ith cmps=20
+    and scas) </li></ul></li></ul>
+<h2>Miscellaneous Instructions</h2>
+<ul>
+  <li><font _mstmutation=3D"1"><b _mstmutation=3D"1">leal <i>src, dest</i><=
+/b>(load effective address -- the address of src=20
+  into dest)=20
+  </font><ul>
+    <li>Memory, Register </li></ul>
+  </li><li><b>nop</b>=20
+  </li><li><b>xlat/xlatb</b>=20
+  </li><li><b>cpuid</b> </li></ul>
+<h2>Floating Point Instructions</h2>
+<center>
+<table border=3D"1" nosave=3D"">
+  <caption><b>Floating Point&nbsp;</b>&nbsp; <br><b>8 32-bit=20
+  registers</b></caption>
+  <tbody>
+  <tr>
+    <td><b>Register</b></td>
+    <td><b>Function</b></td></tr>
+  <tr>
+    <td>st</td>
+    <td></td></tr>
+  <tr>
+    <td>st(0)</td>
+    <td></td></tr>
+  <tr>
+    <td>st(1)</td>
+    <td></td></tr>
+  <tr>
+    <td>...</td>
+    <td></td></tr>
+  <tr>
+    <td>st(7)</td>
+    <td></td></tr></tbody></table></center>&nbsp;=20
+<h2>MMX Instructions</h2>
+<h2>System Instructions</h2>
+<ul>
+  <li><b>hlt</b>=20
+  </li><li><b>lock</b>=20
+  </li><li><b>esc</b>=20
+  </li><li><b>bound</b>=20
+  </li><li><b>enter leave</b> </li></ul>
+<h3>Interrupts</h3>
+<ul>
+  <li><b>int</b>=20
+  </li><li><b>into</b> </li></ul>
+<h3>Memory Management Unit</h3>
+<ul>
+  <li><b>invlpg</b> </li></ul>
+<h3>Cache</h3>
+<h2><b>References</b></h2>
+<ul>
+  <li><b><a href=3D"http://www.x86.org/">http://www.x86.org/</a></b> </li><=
+/ul>
+<hr width=3D"100%">
+
+</body></html>
+------MultipartBoundary--rP9bSbMGT6tsZeNTXvMcK2YCkQEnV08kJ2C5uup3eT------
