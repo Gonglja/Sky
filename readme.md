@@ -16,18 +16,25 @@
 
 ### 第6周-第10周（2022.4.25 - 2022.5.29）
 
-- [ ] [准备软考](https://www.zhixi.com/view/4f83310b)
-- [ ] 研究 linux0.11 内核，输出笔记([linux0.11 内核研究](./week2-5/readme.md))，准备[重新写一个](https://gonglja.github.io/posts/ca3a0e2a/)，前面大部分借鉴**[闪客](https://github.com/sunym1993)**的博文，感谢闪客大佬
-- [ ] smart210 现在 uboot 源码分析了部分，有时间接着看内核子系统 
-    - 设备树
-    - gpio 子系统
-    - etc.
+- [x] [准备软考](https://www.zhixi.com/view/4f83310b)
+    - 终于完事了，~~选择题一些准备的没考上，大题考上的没准备，过应该问题不大~~
 - [x] 成功从 vmware 大户迁移到 docker 了，如何使用，[查看](https://gonglja.github.io/posts/6c58185/)
+
+
+
+### 第11周（2022.5.30 - 2022.6.5）
+
+- [ ] 要开始忙 imx8 相关的 bsp 构建了
 
 
 
 ### 后续要完成的
 
+- [ ] 研究 linux0.11 内核，输出笔记([linux0.11 内核研究](./week2-5/readme.md))，准备[重新写一个](https://gonglja.github.io/posts/ca3a0e2a/)，前面大部分借鉴**[闪客](https://github.com/sunym1993)**的博文，感谢闪客大佬
+- [ ] smart210 现在 uboot 源码分析了部分，有时间接着看内核子系统 
+    - 设备树
+    - gpio 子系统
+    - etc.
+
 - [ ] STL 源码阅读（侯捷STL剖析）
 - [ ] 刷算法（labuladong的算法小抄）
-
