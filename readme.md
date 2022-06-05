@@ -24,13 +24,18 @@
 
 ### 第11周（2022.5.30 - 2022.6.5）
 
-- [ ] 要开始忙 imx8 相关的 bsp 构建了
+- [x] 要开始忙 imx8 相关的 bsp 构建了（[yocto使用笔记](https://note.youdao.com/s/9agRyOgp)）
+
+    
+
+### 第12周（2022.6.6 - 2022.6.12）
+
+- [ ] 研究 linux0.11 内核，输出笔记([linux0.11 内核研究](./week2-5/readme.md))，准备[重新写一个](https://gonglja.github.io/posts/ca3a0e2a/)，前面大部分借鉴**[闪客](https://github.com/sunym1993)**的博文，感谢闪客大佬
 
 
 
 ### 后续要完成的
 
-- [ ] 研究 linux0.11 内核，输出笔记([linux0.11 内核研究](./week2-5/readme.md))，准备[重新写一个](https://gonglja.github.io/posts/ca3a0e2a/)，前面大部分借鉴**[闪客](https://github.com/sunym1993)**的博文，感谢闪客大佬
 - [ ] smart210 现在 uboot 源码分析了部分，有时间接着看内核子系统 
     - 设备树
     - gpio 子系统
