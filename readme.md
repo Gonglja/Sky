@@ -28,9 +28,14 @@
 
     
 
-### 第12周（2022.6.6 - 2022.6.12）
+### 第12-14周（2022.6.6 - 2022.6.26）
 
-- [ ] 研究 linux0.11 内核，输出笔记([linux0.11 内核研究](./week2-5/readme.md))，准备[重新写一个](https://gonglja.github.io/posts/ca3a0e2a/)，前面大部分借鉴**[闪客](https://github.com/sunym1993)**的博文，感谢闪客大佬
+- [ ] 研究 linux0.11 内核，输出笔记([linux0.11 内核研究](./week2-5/readme.md))，准备[重新写一个](https://gonglja.github.io/posts/ca3a0e2a/)，前面大部分借鉴**[闪客](https://github.com/sunym1993)**的博文，感谢闪客大佬	
+
+    - [x] 完成了汇编部分
+
+        
+
 
 
 
