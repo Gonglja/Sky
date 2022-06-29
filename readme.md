@@ -38,9 +38,9 @@
 
 这两周的算法进度也是滞后。
 
-另外跟硬件同事搞了一个[双路 100w+18w 桌面电源](https://github.com/Gonglja/yds-charger)，[原方案](https://github.com/liaozhelin/yds-charger)，预计7月底出来。
+另外跟硬件同事搞了一个[双路 100w+18w 桌面电源](https://github.com/Gonglja/yds-charger)，[原方案](https://github.com/liaozhelin/yds-charger)，预计7月底出来，100w芯片读写已完成，硬件工程师设计中...
 
-
+- [ ] 基于s5pv210芯片smart210板卡的Arm Linux 驱动开发学习，[内核](https://github.com/Gonglja/linux)，[驱动](https://github.com/Gonglja/linux-driver)
 
 
 
