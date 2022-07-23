@@ -17,7 +17,11 @@
 ### 第6周-第10周（2022.4.25 - 2022.5.29）
 
 - [x] [准备软考](https://www.zhixi.com/view/4f83310b)
+    
     - 终于完事了，~~选择题一些准备的没考上，大题考上的没准备，过应该问题不大~~
+    
+      ![](https://note-1251905184.cos.ap-shanghai.myqcloud.com/img/202207240034994.png)
+    
 - [x] 成功从 vmware 大户迁移到 docker 了，如何使用，[查看](https://gonglja.github.io/posts/6c58185/)
 
 
@@ -40,7 +44,9 @@
 
 另外跟硬件同事搞了一个[双路 100w+18w 桌面电源](https://github.com/Gonglja/yds-charger)，[原方案](https://github.com/liaozhelin/yds-charger)，预计7月底出来，100w芯片读写已完成，硬件工程师设计中...
 
-- [ ] 基于s5pv210芯片smart210板卡的Arm Linux 驱动开发学习，[内核](https://github.com/Gonglja/linux)，[驱动](https://github.com/Gonglja/linux-driver)
+- [ ] 基于s5pv210芯片smart210板卡的Arm Linux 驱动开发学习
+
+  仓库：[内核](https://github.com/Gonglja/linux)、[驱动](https://github.com/Gonglja/linux-driver)、[驱动进度](https://github.com/Gonglja/linux-driver/tree/master/01_char/README.md)
 
 
 
