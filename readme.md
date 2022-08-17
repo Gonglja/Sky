@@ -71,15 +71,26 @@
 
 
 
-- [ ] 调试 `EBAZ4205` zynq 开发板的 PS(Processor System)侧 `u-boot-linx`、`kernel-linx`、`petalinux`
+### 第22-32周（2022.8.15 - 2022.10.30）
+
+- [ ] 调试 `EBAZ4205` zynq 开发板的 PS(Processor System)侧 `u-boot-linx`、`kernel-linx`、`petalinux`，完成最小系统启动，基础外围器件驱动调试
   - [ ] boot 启动过程
   - [ ] vivado 使用
   - [ ] u-boot 移植
   - [ ] kernel 移植
+  - [ ] 最小系统启动
+  - [ ] 基础外围器件调试
+  - [ ] etc.
 
+- [ ] zynq 上一个复杂应用的开发
 
+- [ ] zynq 中 PS 与 PL的通信
+
+  
 
 ### 持续性任务
+
+暂时又没有时间了....
 
 - [ ] 研究 linux0.11 内核，输出笔记([linux0.11 内核研究](./week2-5/readme.md))
 
@@ -104,7 +115,7 @@
 ### 后续要完成的
 
 - [ ] 下半年（**11.5 ~ 6**）系统架构师考试，历年报名时间 **8.25 ~ 9.05**
-  - [ ] 报名，[报名地址](https://bm.ruankao.org.cn/sign/welcome) 
+  - [ ] 报名，[报名地址](https://bm.ruankao.org.cn/sign/welcome) , 湖北省还没出, 其他省份陆陆续续已经出来了, 近期要多关注下
   - [ ] 准备考试
 
 - [ ] STL 源码阅读（侯捷STL剖析）
