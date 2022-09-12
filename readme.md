@@ -48,8 +48,6 @@
 
 ### 第20-21周（2022.8.1 - 2022.8.14）
 
-
-
 - [x] 基于`STM32F042`的高频`RFID`标签读卡器
 
   - [x] 支持主动上传、查询模式
@@ -73,13 +71,15 @@
 
 ### 第22-32周（2022.8.15 - 2022.10.30）
 
-- [ ] 调试 `EBAZ4205` zynq 开发板的 PS(Processor System)侧 `u-boot-linx`、`kernel-linx`、`petalinux`，完成最小系统启动，基础外围器件驱动调试
-  - [ ] boot 启动过程
-  - [ ] vivado 使用
-  - [ ] u-boot 移植
-  - [ ] kernel 移植
-  - [ ] 最小系统启动
-  - [ ] 基础外围器件调试
+最近不更新是真的因为太忙了，目前PS侧已经跑通，剩下的就是PS与PL间的通信，以及上层应用的开发
+
+- [x] 调试 `EBAZ4205` zynq 开发板的 PS(Processor System)侧 `u-boot-linx`、`kernel-linx`、`petalinux`，完成最小系统启动，基础外围器件驱动调试
+  - [x] boot 启动过程
+  - [x] vivado 使用
+  - [x] u-boot 移植
+  - [x] kernel 移植
+  - [x] 最小系统启动
+  - [x] 基础外围器件调试
   - [ ] etc.
 
 - [ ] zynq 上一个复杂应用的开发
